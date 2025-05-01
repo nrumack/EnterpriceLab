@@ -29,7 +29,7 @@ public class Member {
     public Member(String firstName, String lastName, Address address, String email, String phone, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = new Address();
+        this.address = address;
         this.email = email;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;

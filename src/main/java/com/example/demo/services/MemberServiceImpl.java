@@ -24,9 +24,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getAllMembers() {
-        return memberRepository.findAll();
-    }
+    public List<Member> getAllMembers() { return memberRepository.findAll(); }
 
     @Override
     public Member getMemberById(Long id) {
@@ -35,12 +33,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteMemberById(Long id) {
+        if(!memberRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Member with id: " + id + " not found");
+        }
         memberRepository.deleteById(id);
-
     }
 
     @Override
     public Member updateMember(Member member) {
+        if (member.getId() == null || memberRepository.existsById(member.getId())) {
+            throw new ResourceNotFoundException("Member with id: " + member.getId() + " not found");
+        }
         return memberRepository.save(member);
     }
 }
